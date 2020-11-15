@@ -137,17 +137,12 @@ def random(request):
 
 
 def search(request):
-    value = request.GET.get('q', '')
+    value = request.GET.get('query', '')
     if util.get_entry(value) is not None:
         return HttpResponseRedirect(reverse("entry", kwargs={'entry': value}))
     else:
-        subStringEntries = []
-        for entry in util.list_entries():
-            if value.upper() in entry.upper():
-                subStringEntries.append(entry)
-
         return render(request, "encyclopedia/notExistingEntry.html", {
-            "entries": subStringEntries,
+            "entries": util.list_entries(),
             "search": True,
             "value": value
         })
