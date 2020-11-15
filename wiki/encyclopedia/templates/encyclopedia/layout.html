@@ -19,8 +19,8 @@
 
 <div id="langsidenav" class="mysidenav">
     <a href="#" class="closebtn" onclick='closeNav_lang()'>X</a>
-    <a href="{% url 'newEntry' %}">한국어</a>
-    <a href="{% url 'random' %}">日本語</a>
+    <a onclick="document.cookie='language=kr';location.href=''" href="#">한국어</a>
+    <a onclick="document.cookie='language=jp';location.href=''" href="#">日本語</a>
 </div>
 
 <div id="mysidenav" class="mysidenav">
