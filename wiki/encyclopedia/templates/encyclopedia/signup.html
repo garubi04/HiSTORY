@@ -14,14 +14,16 @@
                     <p>아이디를 입력해주세요</p>
                 </div>
             </div>
-            <form class="login-form" method="post">
-                <input type="text" placeholder="아이디"/>
-                <input type="password" placeholder="비밀번호"/>
-                <input type="email" placeholder="이메일"/>
-                <input type="username"placeholder="닉네임">
+            <form class="login-form" method="post" action="">
+                {% csrf_token %}
+                <input type="text" placeholder="아이디" name="username"/>
+                <input type="password" placeholder="비밀번호" name="password1"/>
+                <input type="password" placeholder="비밀번호확인" name="password2"/>
+{#                <input type="email" placeholder="이메일"/>#}
+{#                <input type="username"placeholder="닉네임">#}
                 <button>회원가입</button>
-                <p class="message">계정이 있으신가요? <a href="/login.html">로그인하세요!</a></p>
-                <p class="message"><a href="#">아이디 / 비밀번호 찾기</a></p>
+                <p class="message">계정이 있으신가요? <a href="{% url 'login' %}">로그인하세요!</a></p>
+{#                <p class="message"><a href="#">아이디 / 비밀번호 찾기</a></p>#}
             </form>
         </div>
     </div>

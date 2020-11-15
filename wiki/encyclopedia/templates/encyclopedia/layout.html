@@ -1,83 +1,89 @@
 {% load static %}
 <!DOCTYPE html>
-  <html>
-    <head>
-      <title>H!STORY-{% block title %}{% endblock %}</title>
-      <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
-      <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet">
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<html>
+<head>
+    <title>H!STORY-{% block title %}{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-      <link href="{% static 'encyclopedia/css/main.css' %}" rel="stylesheet">
-      <link href="{% static 'encyclopedia/css/sidenav.css' %}" rel="stylesheet">
-      <link href="{% static 'encyclopedia/css/navbar.css' %}" rel="stylesheet">
-      <link href="{% static 'encyclopedia/css/edit.css' %}" rel="stylesheet">
-      <script src="{% static 'encyclopedia/js/sidenav.js' %}"></script>
-    </head>
+    <link href="{% static 'encyclopedia/css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'encyclopedia/css/sidenav.css' %}" rel="stylesheet">
+    <link href="{% static 'encyclopedia/css/navbar.css' %}" rel="stylesheet">
+    <link href="{% static 'encyclopedia/css/edit.css' %}" rel="stylesheet">
+    <script src="{% static 'encyclopedia/js/sidenav.js' %}"></script>
+</head>
 
-    <body>
+<body>
 
-    <div id="langsidenav" class="mysidenav">
-        <a href="#" class="closebtn" onclick='closeNav_lang()'>X</a>
-        <a href="{% url 'newEntry' %}">한국어</a>
-        <a href="{% url 'random' %}">日本語</a>
-      </div>
+<div id="langsidenav" class="mysidenav">
+    <a href="#" class="closebtn" onclick='closeNav_lang()'>X</a>
+    <a href="{% url 'newEntry' %}">한국어</a>
+    <a href="{% url 'random' %}">日本語</a>
+</div>
 
-      <div id="mysidenav" class="mysidenav">
-        <a href="#" class="closebtn" onclick='closeNav()'>X</a>
-        <a href="/login.html">(로그인해주세요)</a>
-        <a href="#">응애</a>
-        <a href="{% url 'newEntry' %}">새 문서 작성</a>
-        <a href="{% url 'random' %}">랜덤 문서 보기</a>
-        <a href="#">Portfolio</a>
-      </div>
+<div id="mysidenav" class="mysidenav">
+    <a href="#" class="closebtn" onclick='closeNav()'>X</a>
+    {% if user.is_authenticated %}
+        <a>안녕하세요, {{ user.get_username }}</a>
+        <a href="logout">로그아웃</a>
+    {% else %}
+        <a href="{% url 'login' %}">(로그인해주세요)</a>
+    {% endif %}
+    <br>
+    <a href="#">응애</a>
+    <a href="{% url 'newEntry' %}">새 문서 작성</a>
+    <a href="{% url 'random' %}">랜덤 문서 보기</a>
+    <a href="#">Portfolio</a>
+</div>
 
 
 
-      <nav>
-        <span class="logo" onclick="location.href = '{% url 'index' %}'">H!STORY</span>
-        <div id="navRight">
-            <span class="material-icons">
-                search
-            </span>
-            <form action="{% url 'search' %}" method="GET">
-                <input type="text" name="query">
-            </form>
-            <span class="material-icons" onclick="openNav()">
+<nav>
+    <span class="logo" onclick="location.href = '{% url 'index' %}'">H!STORY</span>
+    <div id="navRight">
+        <span class="material-icons">
+            search
+        </span>
+        <form action="{% url 'search' %}" method="GET">
+            <input type="text" name="query">
+        </form>
+        <span class="material-icons" onclick="openNav()">
                 person
             </span>
-            <span class="material-icons" onclick="openNav_lang()">
+        <span class="material-icons" onclick="openNav_lang()">
               language
           </span>
+    </div>
+</nav>
+
+<div id="main">
+    <section>
+        <article>
+            <p>
+                {% block body %}
+                {% endblock %}
+            </p>
+        </article>
+    </section>
+    <aside>
+        <div id="recent">
+            <span>최근 변경된 문서</span>
+            <ul id="recentList">
+                {% for entry in entries %}
+                    <li><a href="/encyclopedia/wiki/{{ entry }}">{{ entry }}</a></li>
+                {% endfor %}
+            </ul>
         </div>
-    </nav>
-
-      <div id="main">
-        <section>
-          <article>
-              <p>
-              {% block body %}
-              {% endblock %}
-              </p>
-          </article>
-        </section>
-        <aside>
-            <div id="recent">
-              <span>최근 변경된 문서</span>
-              <ul id="recentList">
-                  {% for entry in entries %}
-                      <li><a href="/encyclopedia/wiki/{{ entry }}">{{ entry }}</a></li>
-                  {% endfor %}
-              </ul>
-            </div>
-        </aside>
-      </div>
+    </aside>
+</div>
 
 
-      <footer>
-        <p>ジョーバイデン候補者の米合衆国大統領当確をおめでとうございます。</p>
-        <p>문서에서 작성된 내용은 허구일 가능성도 있습니다, 참고용으로만 사용하세요</p>
-    </footer>
+<footer>
+    <p>ジョーバイデン候補者の米合衆国大統領当確をおめでとうございます。</p>
+    <p>문서에서 작성된 내용은 허구일 가능성도 있습니다, 참고용으로만 사용하세요</p>
+</footer>
 
-    </body>
-  </html>
+</body>
+</html>

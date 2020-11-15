@@ -5,5 +5,5 @@
     <file url="file://$PROJECT_DIR$/wiki/encyclopedia/templates/encyclopedia/docs.html" />
     <file url="file://$PROJECT_DIR$/wiki/encyclopedia/templates/encyclopedia/edit.html" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.8 (アーカイブ)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.8 (virtual)" project-jdk-type="Python SDK" />
 </project>

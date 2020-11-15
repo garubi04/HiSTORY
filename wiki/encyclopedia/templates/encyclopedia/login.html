@@ -15,12 +15,13 @@
                 <p>아이디를 입력해주세요</p>
             </div>
         </div>
-        <form class="login-form">
-            <input type="text" placeholder="아이디"/>
-            <input type="password" placeholder="비밀번호"/>
+        <form class="login-form" method="post" action="">
+            {% csrf_token %}
+            <input type="text" placeholder="아이디" name="username"/>
+            <input type="password" placeholder="비밀번호" name="password"/>
             <button>로그인</button>
-            <p class="message">가입하지 않으셨나요? <a href="/registration.html">계정을 만드세요</a></p>
-            <p class="message"><a href="#">아이디 / 비밀번호 찾기</a></p>
+            <p class="message">가입하지 않으셨나요? <a href="{% url 'signup' %}">계정을 만드세요</a></p>
+{#            <p class="message"><a href="#">아이디 / 비밀번호 찾기</a></p>#}
         </form>
     </div>
 </div>

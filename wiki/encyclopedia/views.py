@@ -35,7 +35,7 @@ def signup(request):
             user = User.objects.create_user(
                 username=request.POST["username"], password=request.POST["password1"])
             auth.login(request, user)
-            return redirect('')
+            return redirect('/encyclopedia/login/')
         return render(request, "encyclopedia/signup.html")
     else:
         return render(request, "encyclopedia/signup.html");
@@ -49,7 +49,7 @@ def login(request):
         user = auth.authenticate(request, username=username, password=password)
         if user is not None:
             auth.login(request, user)
-            return redirect('')
+            return redirect('/encyclopedia/')
         else:
             return render(request, 'encyclopedia/login.html', {'error': 'username or password is incorrect'})
     else:
@@ -58,7 +58,7 @@ def login(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect('')
+    return redirect('/encyclopedia/')
 
 
 def entry(request, entry):
