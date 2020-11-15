@@ -1,28 +1,31 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="jp">
+<html>
 <head>
     <link href="{% static 'encyclopedia/css/login.css' %}" rel="stylesheet">
     <title> ログイン </title>
 </head>
 <body>
-  <body>
-    <div class="login-page">
-      <div class="form">
+<body>
+<div class="login-page">
+    <div class="form">
         <div class="login">
-          <div class="login-header">
-            <h3>H!STORY ログイン</h3>
-            <p>アカウントを入力してください</p>
-          </div>
+            <div class="login-header">
+                <h3>H!STORY ログイン</h3>
+                <p>アカウントを入力してください</p>
+            </div>
         </div>
-        <form class="login-form">
-          <input type="text" placeholder="ID"/>
-          <input type="password" placeholder="パスワード"/>
-          <button>ログイン</button>
-          <p class="message">登録がまだの場合 <a href="jp_registration.html">H!STORY 会員登録</a></p>
-          <p class="message"><a href="#">アカウントをお忘れですか？</a></p>
+        <form class="login-form" method="post" action="">
+            {% csrf_token %}
+            <input type="text" placeholder="ID" name="username"/>
+            <input type="password" placeholder="パスワード" name="password"/>
+            <button>ログイン</button>
+            <p class="message">登録がまだの場合 <a href="{% url 'signup' %}">H!STORY 会員登録</a></p>
+{#            <p class="message"><a href="#">아이디 / 비밀번호 찾기</a></p>#}
         </form>
-      </div>
     </div>
+</div>
 </body>
 </body>
 </html>
+

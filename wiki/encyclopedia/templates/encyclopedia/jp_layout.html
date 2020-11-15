@@ -18,16 +18,22 @@
     <body>
 
       <div id="mysidenav" class="mysidenav">
-        <a href="#" class="closebtn" onclick='closeNav()'>X</a>
-        <a href="/login.html">(ログイン)</a>
-        <a href="{% url 'newEntry' %}">新しいページ</a>
-        <a href="{% url 'random' %}">おまかせ表示</a>
-      </div>
+    <a href="#" class="closebtn" onclick='closeNav()'>X</a>
+    {% if user.is_authenticated %}
+        <a>ようこそ, {{ user.get_username }}</a>
+        <a href="logout">サインアウト</a>
+    {% else %}
+        <a href="{% url 'login' %}">ログイン</a>
+    {% endif %}
+    <br>
+    <a href="{% url 'newEntry' %}">新しいページ</a>
+    <a href="{% url 'random' %}">おまかせ表示</a>
+    </div>
 
       <div id="langsidenav" class="mysidenav">
-        <a href="#" class="closebtn" onclick='closeNav_lang()'>X</a>
-        <a href="{% url 'newEntry' %}">한국어</a>
-        <a href="{% url 'random' %}">日本語</a>
+          <a href="#" class="closebtn" onclick='closeNav_lang()'>X</a>
+          <a onclick="document.cookie='language=kr';location.href=''" href="#">한국어</a>
+          <a onclick="document.cookie='language=jp';location.href=''" href="#">日本語</a>
       </div>
 
       <nav>

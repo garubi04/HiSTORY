@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="{% static 'encyclopedia/css/login.css' %}" rel="stylesheet">
+    <title> 会員登録 </title>
+</head>
+<body>
+    <div class="login-page">
+        <div class="form">
+            <div class="login">
+                <div class="login-header">
+                    <h3>H!STORY 会員登録</h3>
+                    <p>アカウントを入力してください</p>
+                </div>
+            </div>
+            <form class="login-form" method="post" action="">
+                {% csrf_token %}
+                <input type="text" placeholder="ID" name="username"/>
+                <input type="password" placeholder="パスワード" name="password1"/>
+                <input type="password" placeholder="パスワード確認" name="password2"/>
+{#                <input type="email" placeholder="이메일"/>#}
+{#                <input type="username"placeholder="닉네임">#}
+                <button>회원가입</button>
+                <p class="message">アカウントがありますか? <a href="{% url 'login' %}">!</a></p>
+{#                <p class="message"><a href="#">아이디 / 비밀번호 찾기</a></p>#}
+            </form>
+        </div>
+    </div>
+</body>
+</html>

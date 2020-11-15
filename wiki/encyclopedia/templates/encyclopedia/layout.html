@@ -29,13 +29,11 @@
         <a>안녕하세요, {{ user.get_username }}</a>
         <a href="logout">로그아웃</a>
     {% else %}
-        <a href="{% url 'login' %}">(로그인해주세요)</a>
+        <a href="{% url 'login' %}">로그인해주세요</a>
     {% endif %}
     <br>
-    <a href="#">응애</a>
     <a href="{% url 'newEntry' %}">새 문서 작성</a>
     <a href="{% url 'random' %}">랜덤 문서 보기</a>
-    <a href="#">Portfolio</a>
 </div>
 
 
