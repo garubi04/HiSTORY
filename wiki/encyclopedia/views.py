@@ -1,6 +1,6 @@
 import markdown2
 # import secrets
-import random
+import random as rand
 from django.core.files.base import ContentFile
 
 from django.shortcuts import render
@@ -66,11 +66,13 @@ def entry(request, entry):
     entryPage = util.get_entry(entry)
     if entryPage is None:
         return render(request, "encyclopedia/notExistingEntry.html", {
+            "entries": util.list_entries(),
             "entryTitle": entry
         })
     else:
         return render(request, "encyclopedia/entry.html", {
             "entry": markdowner.convert(entryPage),
+            "entries": util.list_entries(),
             "entryTitle": entry
         })
 
@@ -89,17 +91,20 @@ def newEntry(request):
             else:
                 return render(request, "encyclopedia/newEntry.html", {
                     "form": form,
+                    "entries": util.list_entries(),
                     "existing": True,
                     "entry": title
                 })
         else:
             return render(request, "encyclopedia/newEntry.html", {
                 "form": form,
+                "entries": util.list_entries(),
                 "existing": False
             })
     else:
         return render(request, "encyclopedia/newEntry.html", {
             "form": NewEntryForm(),
+            "entries": util.list_entries(),
             "existing": False
         })
 
@@ -108,7 +113,8 @@ def edit(request, entry):
     entryPage = util.get_entry(entry)
     if entryPage is None:
         return render(request, "encyclopedia/nonExistingEntry.html", {
-            "entryTitle": entry
+            "entryTitle": entry,
+            "entries": util.list_entries()
         })
     else:
         form = NewEntryForm()
@@ -119,13 +125,14 @@ def edit(request, entry):
         return render(request, "encyclopedia/newEntry.html", {
             "form": form,
             "edit": form.fields["edit"].initial,
-            "entryTitle": form.fields["title"].initial
+            "entryTitle": form.fields["title"].initial,
+            "entries": util.list_entries(),
         })
 
 
 def random(request):
     entries = util.list_entries()
-    randomEntry = random.choice(entries)
+    randomEntry = rand.choice(entries)
     return HttpResponseRedirect(reverse("entry", kwargs={'entry': randomEntry}))
 
 
