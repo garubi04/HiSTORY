@@ -1,0 +1,35 @@
+{% extends "encyclopedia/jp_layout.html" %}
+
+{% block title %}
+    {% if edit %}
+        Editing {{ entryTitle }}
+    {% else %}
+        New entry
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {% if edit %}
+        <span style="font-size: 3em;">{{ entryTitle }}</span>
+    {% else %}
+        <h1>文書の作成</h1>
+    {% endif %}
+
+    
+    {% if existing %}
+    <div class="alert alert-danger" role="alert">
+        この文書は既にある文書です。 ご覧になるか、編集するには <a href="/encyclopedia/wiki/{{ entry }}" class="alert-link">ここをクリックしてください。</a>.
+    </div>
+    <div class="alert alert-info" role="alert">
+        またはここで文書のタイトルを変更できます。
+    </div>
+    {% endif %}
+    <br>
+    <div class="form-group">
+        <form action="{% url 'newEntry' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit">
+        </form>
+    </div>        
+{% endblock %}

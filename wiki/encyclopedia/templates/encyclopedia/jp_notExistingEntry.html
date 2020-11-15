@@ -1,0 +1,22 @@
+{% extends "encyclopedia/jp_layout.html" %}
+
+{% block title %}
+    {{ entryTitle }} を見つかりません！
+{% endblock %}
+
+{% block body %}
+    <h1><i>{{ entryTitle }}</i>?</h1>
+    <h4>初めてみるものですが、、</h4>
+
+    <p> あなたの文書がまだ作成されないようです！ 문서가 아직 실존하지 않는 거 같습니다..!</p>
+    <p> ここを <a href="{% url 'newEntry' %}">クリックして</a>あなたの文書を作成しましょう!:D</p>
+
+{% endblock %}
+
+{% block body2 %}
+              <ul id="recentList">
+                {% for entry in entries %}
+                <a href = "/encyclopedia/wiki/{{ entry }}" ><li>{{ entry }}</li></a>
+                {% endfor %}
+              </ul>
+              {% endblock %}
