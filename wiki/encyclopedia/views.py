@@ -139,7 +139,7 @@ def search(request):
             if value.upper() in entry.upper():
                 subStringEntries.append(entry)
 
-        return render(request, "encyclopedia/index.html", {
+        return render(request, "encyclopedia/notExistingEntry.html", {
             "entries": subStringEntries,
             "search": True,
             "value": value
