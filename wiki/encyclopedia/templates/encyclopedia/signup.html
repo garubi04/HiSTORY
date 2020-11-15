@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="{% static 'encyclopedia/css/login.css' %}" rel="stylesheet">
+    <title> 회원가입 </title>
+</head>
+<body>
+<body>
+<div class="login-page">
+    <div class="form">
+        <div class="login">
+            <div class="login-header">
+                <h3>H!STORY 회원가입</h3>
+                <p>아이디를 입력해주세요</p>
+            </div>
+        </div>
+        <form class="login-form">
+            <input type="text" placeholder="아이디"/>
+            <input type="password" placeholder="비밀번호"/>
+            <input type="email" placeholder="이메일"/>
+            <input type="username"placeholder="닉네임">
+            <button>회원가입</button>
+            <p class="message">계정이 있으신가요? <a href="/login.html">로그인하세요!</a></p>
+            <p class="message"><a href="#">아이디 / 비밀번호 찾기</a></p>
+        </form>
+    </div>
+</div>
+</body>
+</body>
+</html>

@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>H!STORY-{% block title %}{% endblock %}</title>
+      <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet">
+
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link href="{% static 'encyclopedia/css/main.css' %}" rel="stylesheet">
+      <link href="{% static 'encyclopedia/css/sidenav.css' %}" rel="stylesheet">
+      <link href="{% static 'encyclopedia/css/navbar.css' %}" rel="stylesheet">
+      <link href="{% static 'encyclopedia/css/edit.css' %}" rel="stylesheet">
+      <script src="{% static 'encyclopedia/js/sidenav.js' %}"></script>
+    </head>
+
+    <body>
+
+      <div id="mysidenav" class="mysidenav">
+        <a href="#" class="closebtn" onclick='closeNav()'>X</a>
+        <a href="/login.html">(ログイン)</a>
+        <a href="{% url 'newEntry' %}">新しいページ</a>
+        <a href="{% url 'random' %}">おまかせ表示</a>
+      </div>
+
+      <div id="mysidenav_lang" class="mysidenav">
+        <a href="#" class="closebtn" onclick='closeNav_lang()'>X</a>
+        <a href="/login.html">(ログイン)</a>
+        <a href="{% url 'newEntry' %}">한국어</a>
+        <a href="{% url 'random' %}">日本語</a>
+      </div>
+
+      <nav>
+        <span class="logo" onclick="location.href = '{% url 'index' %}'">H!STORY</span>
+        <div id="navRight">
+            <span class="material-icons">
+                search
+            </span>
+            <form action="{% url 'search' %}" method="GET">
+                <input type="text" name="query">
+            </form>
+            <span class="material-icons" onclick="openNav()">
+                person
+            </span>
+            <span class="material-icons" onclick="openNav_lang()">
+              language
+          </span>
+        </div>
+    </nav>
+
+      <div id="main">
+        <section>
+          <article>
+              <p>
+              {% block body %}
+              {% endblock %}
+              </p>
+          </article>
+        </section>
+        <aside>
+            <div id="recent">
+              <span>最近の変更</span>
+              <ul id="recentList">
+                  {% for entry in entries %}
+                      <li><a href="/encyclopedia/wiki/{{ entry }}">{{ entry }}</a></li>
+                  {% endfor %}
+              </ul>
+            </div>
+        </aside>
+      </div>
+
+
+      <footer>
+        <p>문서에서 작성된 내용은 허구일 가능성도 있습니다, 참고용으로만 사용하세요</p>
+    </footer>
+
+    </body>
+  </html>

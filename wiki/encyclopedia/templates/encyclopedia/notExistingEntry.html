@@ -1,0 +1,22 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{ entryTitle }} 를 찾을 수 없습니다!
+{% endblock %}
+
+{% block body %}
+    <h1><i>{{ entryTitle }}</i>?</h1>
+    <h4>처음 보는것 같은데..</h4>
+
+    <p> 당신의 문서가 아직 실존하지 않는 거 같습니다..!</p>
+    <p> 여길 <a href="{% url 'newEntry' %}">눌러</a>당신의 문서를 만드세요!:D</p>
+
+{% endblock %}
+
+{% block body2 %}
+              <ul id="recentList">
+                {% for entry in entries %}
+                <a href = "/encyclopedia/wiki/{{ entry }}" ><li>{{ entry }}</li></a>
+                {% endfor %}
+              </ul>
+              {% endblock %}

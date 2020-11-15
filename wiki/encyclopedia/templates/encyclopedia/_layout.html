@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+
+  <html lang="en">
+    <head>
+
+      <title>H!STORY-{% block title %}{% endblock %}</title>
+      <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet">
+
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link href="{% static 'encyclopedia/css/main.css' %}" rel="stylesheet">
+      <link href="{% static 'encyclopedia/css/sidenav.css' %}" rel="stylesheet">
+      <link href="{% static 'encyclopedia/css/navbar.css' %}" rel="stylesheet">
+      <script src="{% static 'encyclopedia/js/sidenav.js' %}"></script>
+   </head>
+
+    <body>
+
+      <div id="mysidenav" class="mysidenav">
+        <a href="#" class="closebtn" onclick='closeNav()'>X</a>
+        <a href="/login.html">로그인</a>
+        <a href="{% url 'newEntry' %}">새 문서 생성</a>
+        <a href="{% url 'random' %}" role="button">랜덤 문서 보기</a>
+      </div>
+
+      <nav>
+        <span class="logo" ><a href="{% url 'index' %}"><img src="{% static 'encyclopedia/로고4.png' %}" ></a></span>
+        <div id="navRight">
+            <span class="material-icons">
+                search
+            </span>
+            <form action="{% url 'search' %}" method="GET">
+              <input type="text" name="q" placeholder="Search Encyclopedia">
+          </form>
+            <span class="material-icons" onclick="openNav()">
+                person
+            </span>
+        </div>
+    </nav>
+
+      <div id="main" >
+         <aside>
+        <div id="recent">
+              <span>문서 목록</span>
+
+              <ul id="recentList">
+                {% for entry in entries %}
+                <a href = "/encyclopedia/wiki/{{ entry }}" ><li>{{ entry }}</li></a>
+                {% endfor %}
+              </ul>
+
+            </div>
+          </aside>
+
+
+
+        <section>
+          <article >
+              <hr>
+              {% if search %}
+                    <h2> {{ value }} 를 찾는중입니다</h2>
+              {% else %}
+              {% endif %}
+              <h3>
+              {% block body %}
+              {% endblock %}></h3>
+          </article>
+        </section>
+
+      </div>
+
+
+      <footer>
+
+        <p>문서에서 작성된 내용은 허구일 가능성도 있습니다, 참고용으로만 사용하세요</p>
+    </footer>
+
+    </body>
+  </html>
+

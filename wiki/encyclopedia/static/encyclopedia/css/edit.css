@@ -1,0 +1,30 @@
+section, article{
+    width: 100%;
+}
+
+article{
+    padding:5px;
+}
+
+article > input{
+    /* width: 600px; */
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    /* margin-left: 63px; */
+    font-size: 3em;
+}
+
+#id_content{
+    /* margin-left: 63px; */
+    box-sizing: border-box;
+    margin-top: 5px;
+    height: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+article > hr{
+    /* margin-left: 50px; */
+    text-align: center;
+}

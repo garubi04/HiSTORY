@@ -1,0 +1,35 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {% if edit %}
+        Editing {{ entryTitle }}
+    {% else %}
+        New entry
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {% if edit %}
+        <span style="font-size: 3em;">{{ entryTitle }}</span>
+    {% else %}
+        <h1>문서 생성</h1>
+    {% endif %}
+
+    
+    {% if existing %}
+    <div class="alert alert-danger" role="alert">
+        이 항목은 이미 존재합니다. 보시거나 편집하려면, <a href="/encyclopedia/wiki/{{ entry }}" class="alert-link">여길 누르세요</a>.
+    </div>
+    <div class="alert alert-info" role="alert">
+        또는 여기서 항목 이름을 변경 할 수 있습니다. 모든건 당신에게 달렸습니다. ¯\_(ツ)_/¯
+    </div>
+    {% endif %}
+    <br>
+    <div class="form-group">
+        <form action="{% url 'newEntry' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit">
+        </form>
+    </div>        
+{% endblock %}
