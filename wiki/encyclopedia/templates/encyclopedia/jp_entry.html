@@ -1,11 +1,11 @@
-{% extends "encyclopedia/jp_layout.html" %}
+{% extends "encyclopedia/layout.html" %}
 
 {% block title %}
     {{ entryTitle }}
 {% endblock %}
 
 {% block body %}
-    <button><a href="/encyclopedia/wiki/{{ entryTitle }}/edit" role="button"></a>修正</button>
+    <button><a href="/encyclopedia/wiki/{{ entryTitle }}/edit" role="button">修正</a> </button>
     {{ entry|safe }}
     
 {% endblock %}
